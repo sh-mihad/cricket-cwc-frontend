@@ -34,7 +34,7 @@ export default function Home() {
               navigate("/all-fixture")
             }}
           >
-            View All Fixture
+            All Match Schedule
           </Button>
         </Box>
         <Divider

@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-const pages = ["Home", "All Series","All Teams", "All Fixtures", "Login", "Register"];
+const pages = ["Home", "All Series","All Teams", "Match Schedule", "Login", "Register"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 export default function Menubar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -40,7 +40,7 @@ export default function Menubar() {
       case "Home":
         navigate("/");
         break;
-      case "All Fixtures":
+      case "Match Schedule":
         navigate("/all-fixture");
         break;
       case "All Series":

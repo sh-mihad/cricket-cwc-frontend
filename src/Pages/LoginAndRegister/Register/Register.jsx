@@ -10,10 +10,16 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Register() {
+  const [name,setName] = useState()
+  const [email,setEmail] = useState()
+  const [password,setPassword] = useState()
+ const navigate = useNavigate()
+
   const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
     clipPath: 'inset(50%)',
@@ -27,7 +33,19 @@ export default function Register() {
   });
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("hello");
+    const payload = {
+      userName: name,
+      email: email,
+      password: password,
+    };
+    console.log(payload);
+    axios.post('http://localhost:5000/register', payload)
+      .then(function (response) {
+        navigate('/')
+      })
+      .catch(function (error) {
+        alert(error.message)
+      });
   };
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
@@ -63,7 +81,7 @@ export default function Register() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Register 
           </Typography>
           <Box
             component="form"
@@ -82,6 +100,9 @@ export default function Register() {
               name="name"
               autoComplete="name"
               autoFocus
+              onChange={(e)=>{
+                setName(e.target.value)
+              }}
             />
             <TextField
               margin="normal"
@@ -92,6 +113,9 @@ export default function Register() {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={(e)=>{
+                setEmail(e.target.value)
+              }}
             />
             <TextField
               margin="normal"
@@ -102,15 +126,18 @@ export default function Register() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={(e)=>{
+                setPassword(e.target.value)
+              }}
             />
-            <TextField
+            {/* <TextField
               margin="normal"
               required
               fullWidth
               name="file"
               type="file"
               id="file"
-            />
+            /> */}
            
             <Button
               type="submit"
@@ -118,7 +145,7 @@ export default function Register() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Register 
             </Button>
             <Grid container>
               <Grid item xs>

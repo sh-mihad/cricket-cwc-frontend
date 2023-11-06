@@ -9,14 +9,31 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import useAxiosGet from "../../../common/helper/useAxiosGet";
 
 export default function Login() {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [,getUserData] = useAxiosGet()
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("hello");
+
+    axios.get(`http://localhost:5000/login?email=${email}&password=${password}`)
+    .then(res=>{
+      if(res.data){
+        navigate("/")
+      }
+    }).catch(error=>{
+      alert(error)
+    })
+    
   };
+
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
       <CssBaseline />
@@ -70,6 +87,9 @@ export default function Login() {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
             />
             <TextField
               margin="normal"
@@ -80,6 +100,9 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
             <Button
               type="submit"
