@@ -1,0 +1,13 @@
+.display-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Create a grid with 3 equal-width columns */
+    gap: 20px; /* Add some space between grid items */
+}
+
+.card{
+    width: 100%;
+    transition: width 2s;
+}
+.card:hover{
+    width: 103%;
+}
